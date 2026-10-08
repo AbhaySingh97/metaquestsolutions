@@ -58,8 +58,12 @@ export default function HomePage() {
       {/* Floating Navbar with Official Logo */}
       <Navbar onExploreClick={scrollToWorkshops} />
 
-      {/* Hero with Live Dynamic Settings & Countdown */}
-      <Hero onExploreClick={scrollToWorkshops} settings={siteSettings} />
+      {/* Hero with Live Dynamic Settings & Real Scheduled Countdown */}
+      <Hero
+        onExploreClick={scrollToWorkshops}
+        settings={siteSettings}
+        nextWorkshop={workshops[0]}
+      />
 
       {/* Live Workshops Catalog with Roadmap Curriculum synced with Admin CMS */}
       <WorkshopList

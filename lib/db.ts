@@ -1,8 +1,10 @@
 import fs from "fs";
 import path from "path";
+import os from "os";
 import { WORKSHOPS_DATA, Workshop } from "@/data/workshops";
 
 const DB_FILE = path.join(process.cwd(), "data", "db.json");
+const TMP_DB_FILE = path.join(os.tmpdir(), "metaquest_db.json");
 
 export interface MetricItem {
   id: string;
@@ -54,13 +56,13 @@ const DEFAULT_SETTINGS: SiteSettings = {
   heroHighlight: "Deep Tech",
   heroSubtitle:
     "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Autonomous Smart Traffic Systems, GreenBinX IoT, and Patent Novelty Formulation with hands-on researchers.",
-  nextCohortDate: "2026-10-24T10:00:00",
+  nextCohortDate: "2026-10-24T10:00:00+05:30",
   metrics: [
     {
       id: "m-1",
       label: "Live Cohorts",
-      value: "4 Active Batches",
-      detail: "AI, Smart IoT, Agritech & Patents",
+      value: "1 Active Batch",
+      detail: "AI in Agriculture & Precision Farming",
     },
     {
       id: "m-2",
@@ -84,8 +86,8 @@ const DEFAULT_SETTINGS: SiteSettings = {
   faqs: [
     {
       id: "faq-1",
-      q: "How do I receive the workshop link and digital ticket after paying through Razorpay?",
-      a: "Immediately upon successful payment via Razorpay (UPI, Card, Netbanking), you will see your digital pass on the screen with a unique ticket code. A copy along with the calendar invite and Google Meet link will be instantly sent to your registered email address.",
+      q: "How do I register and receive the workshop Google Meet link?",
+      a: "Click 'Register via Google Form' on the workshop card. Complete the short registration form with your contact details. You will receive an automated confirmation email along with the Google Meet calendar invite and meeting link.",
     },
     {
       id: "faq-2",
@@ -104,53 +106,133 @@ const DEFAULT_SETTINGS: SiteSettings = {
     },
     {
       id: "faq-5",
-      q: "Can I get a refund if my schedule changes?",
-      a: "We offer a 100% no-questions-asked refund if requested at least 24 hours prior to the scheduled workshop start time. Simply email us with your Ticket ID.",
+      q: "How are the live interactive sessions conducted?",
+      a: "All live workshops are hosted on Google Meet with interactive screen-sharing, live debugging, and dedicated Q&A breakout sessions directly with the mentors.",
     },
   ],
 };
 
-function ensureDb(): DatabaseSchema {
+declare global {
+  var __metaquest_db: DatabaseSchema | undefined;
+}
+
+// Helper to commit changes directly to GitHub repository (persists across all Vercel instances)
+async function syncToGitHub(data: DatabaseSchema) {
+  const token = process.env.GITHUB_TOKEN;
+  const repo = process.env.GITHUB_REPO || "AbhaySingh97/metaquestsolutions";
+  if (!token) return;
+
   try {
-    if (!fs.existsSync(DB_FILE)) {
-      const initial: DatabaseSchema = {
-        siteSettings: DEFAULT_SETTINGS,
-        workshops: WORKSHOPS_DATA,
-        registrations: [],
-      };
-      fs.writeFileSync(DB_FILE, JSON.stringify(initial, null, 2), "utf-8");
-      return initial;
+    const url = `https://api.github.com/repos/${repo}/contents/data/db.json`;
+    const getRes = await fetch(url, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json",
+        "User-Agent": "MetaQuest-Admin-Sync",
+      },
+      cache: "no-store",
+    });
+
+    let sha = "";
+    if (getRes.ok) {
+      const getJson = await getRes.json();
+      sha = getJson.sha;
     }
-    const raw = fs.readFileSync(DB_FILE, "utf-8");
-    const parsed = JSON.parse(raw);
-    if (!parsed.siteSettings) parsed.siteSettings = DEFAULT_SETTINGS;
-    if (!parsed.workshops || parsed.workshops.length === 0) parsed.workshops = WORKSHOPS_DATA;
-    if (!parsed.registrations) parsed.registrations = [];
-    return parsed;
-  } catch (error) {
-    console.error("Database read error:", error);
-    return {
-      siteSettings: DEFAULT_SETTINGS,
-      workshops: WORKSHOPS_DATA,
-      registrations: [],
-    };
+
+    const contentStr = JSON.stringify(data, null, 2);
+    const base64Content = Buffer.from(contentStr).toString("base64");
+
+    await fetch(url, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github.v3+json",
+        "Content-Type": "application/json",
+        "User-Agent": "MetaQuest-Admin-Sync",
+      },
+      body: JSON.stringify({
+        message: "Admin CMS sync: updated db.json",
+        content: base64Content,
+        sha: sha || undefined,
+      }),
+    });
+  } catch (err) {
+    console.error("GitHub API sync error:", err);
   }
+}
+
+function ensureDb(): DatabaseSchema {
+  // 1. In-memory hot cache
+  if (globalThis.__metaquest_db) {
+    return globalThis.__metaquest_db;
+  }
+
+  // 2. Writable /tmp filesystem (Vercel serverless)
+  if (fs.existsSync(TMP_DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(TMP_DB_FILE, "utf-8");
+      const parsed = JSON.parse(raw);
+      if (parsed && Array.isArray(parsed.workshops)) {
+        globalThis.__metaquest_db = parsed;
+        return parsed;
+      }
+    } catch (e) {
+      console.warn("Failed reading tmp db:", e);
+    }
+  }
+
+  // 3. Local build file
+  if (fs.existsSync(DB_FILE)) {
+    try {
+      const raw = fs.readFileSync(DB_FILE, "utf-8");
+      const parsed = JSON.parse(raw);
+      if (!parsed.siteSettings) parsed.siteSettings = DEFAULT_SETTINGS;
+      if (!parsed.workshops) parsed.workshops = WORKSHOPS_DATA;
+      if (!parsed.registrations) parsed.registrations = [];
+
+      globalThis.__metaquest_db = parsed;
+      return parsed;
+    } catch (error) {
+      console.error("Database read error:", error);
+    }
+  }
+
+  const initial: DatabaseSchema = {
+    siteSettings: DEFAULT_SETTINGS,
+    workshops: WORKSHOPS_DATA,
+    registrations: [],
+  };
+  globalThis.__metaquest_db = initial;
+  return initial;
 }
 
 function saveDb(data: DatabaseSchema) {
+  // Update in-memory hot cache
+  globalThis.__metaquest_db = data;
+
+  // 1. Attempt writing to local DB_FILE (local dev)
   try {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2), "utf-8");
-  } catch (error) {
-    console.error("Database write error:", error);
+  } catch {
+    // Expected on Vercel read-only filesystem
   }
+
+  // 2. Always write to writable /tmp filesystem (Vercel runtime)
+  try {
+    fs.writeFileSync(TMP_DB_FILE, JSON.stringify(data, null, 2), "utf-8");
+  } catch (e) {
+    console.error("Failed writing to tmp db:", e);
+  }
+
+  // 3. Background sync to GitHub repository (permanent cloud persistence)
+  syncToGitHub(data).catch(() => {});
 }
 
-// Get everything for public site
+// Public getters
 export function getFullDb(): DatabaseSchema {
   return ensureDb();
 }
 
-// Settings methods
 export function getSiteSettings(): SiteSettings {
   return ensureDb().siteSettings;
 }
@@ -162,7 +244,6 @@ export function updateSiteSettings(settings: Partial<SiteSettings>): SiteSetting
   return db.siteSettings;
 }
 
-// Workshops methods
 export function getWorkshops(): Workshop[] {
   return ensureDb().workshops;
 }
@@ -186,7 +267,6 @@ export function deleteWorkshop(id: string): Workshop[] {
   return db.workshops;
 }
 
-// Registration methods
 export function getRealRegistrations(): StoredRegistration[] {
   return ensureDb().registrations;
 }
@@ -195,7 +275,6 @@ export function addRealRegistration(reg: StoredRegistration) {
   const db = ensureDb();
   db.registrations.unshift(reg);
 
-  // Increment real seat count for the booked workshop
   const w = db.workshops.find((item) => item.id === reg.workshopId);
   if (w) {
     w.seatsBooked = (w.seatsBooked || 0) + 1;

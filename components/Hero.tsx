@@ -3,18 +3,21 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, Clock, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
 import { SiteSettings } from "@/lib/db";
+import { Workshop } from "@/data/workshops";
 
 interface HeroProps {
   onExploreClick: () => void;
   settings?: SiteSettings;
+  nextWorkshop?: Workshop;
 }
 
-export default function Hero({ onExploreClick, settings }: HeroProps) {
+export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroProps) {
+  const [mounted, setMounted] = useState(false);
   const [timeLeft, setTimeLeft] = useState({
-    days: 15,
-    hours: 14,
-    minutes: 32,
-    seconds: 45,
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   });
 
   const announcement =
@@ -26,27 +29,34 @@ export default function Hero({ onExploreClick, settings }: HeroProps) {
     settings?.heroSubtitle ||
     "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Autonomous Smart Traffic Systems, GreenBinX IoT, and Patent Novelty Formulation with hands-on researchers.";
 
+  // Calculate target timestamp dynamically from actual scheduled workshop or settings
+  const targetTimestamp = settings?.nextCohortDate
+    ? new Date(settings.nextCohortDate).getTime()
+    : new Date("2026-10-24T10:00:00+05:30").getTime();
+
   useEffect(() => {
-    const target = settings?.nextCohortDate
-      ? new Date(settings.nextCohortDate).getTime()
-      : new Date().getTime() + 15 * 24 * 60 * 60 * 1000;
+    setMounted(true);
 
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const difference = target - now;
+    const updateCountdown = () => {
+      const now = Date.now();
+      const diff = Math.max(0, targetTimestamp - now);
 
-      if (difference > 0) {
-        setTimeLeft({
-          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-          seconds: Math.floor((difference % (1000 * 60)) / 1000),
-        });
-      }
-    }, 1000);
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        minutes: Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60)),
+        seconds: Math.floor((diff % (1000 * 60)) / 1000),
+      });
+    };
 
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
     return () => clearInterval(interval);
-  }, [settings?.nextCohortDate]);
+  }, [targetTimestamp]);
+
+  const workshopScheduleText = nextWorkshop
+    ? `${nextWorkshop.date} • ${nextWorkshop.time.split("-")[0].trim()}`
+    : "Saturday, Oct 24, 2026 • 10:00 AM IST";
 
   return (
     <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-cyber-grid">
@@ -93,22 +103,22 @@ export default function Hero({ onExploreClick, settings }: HeroProps) {
             </a>
           </div>
 
-          {/* Live Countdown Card */}
+          {/* Live Countdown Card - Dynamically Bound to Next Workshop */}
           <div className="max-w-xl mx-auto rounded-2xl p-6 bg-surface/70 border border-white/10 relative overflow-hidden">
-            <div className="flex items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
               <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-gray-300">
                 <Clock className="w-4 h-4 text-cyan-400" />
-                <span>Next Workshop Starts In</span>
+                <span>Next Live Cohort: {workshopScheduleText}</span>
               </div>
               <span className="text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono">
-                Seats Filling Fast
+                Live Google Meet
               </span>
             </div>
 
             <div className="grid grid-cols-4 gap-3 text-center">
               <div className="bg-black/40 rounded-xl p-3 border border-white/5">
                 <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {String(timeLeft.days).padStart(2, "0")}
+                  {mounted ? String(timeLeft.days).padStart(2, "0") : "--"}
                 </div>
                 <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
                   Days
@@ -116,7 +126,7 @@ export default function Hero({ onExploreClick, settings }: HeroProps) {
               </div>
               <div className="bg-black/40 rounded-xl p-3 border border-white/5">
                 <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {String(timeLeft.hours).padStart(2, "0")}
+                  {mounted ? String(timeLeft.hours).padStart(2, "0") : "--"}
                 </div>
                 <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
                   Hours
@@ -124,7 +134,7 @@ export default function Hero({ onExploreClick, settings }: HeroProps) {
               </div>
               <div className="bg-black/40 rounded-xl p-3 border border-white/5">
                 <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {String(timeLeft.minutes).padStart(2, "0")}
+                  {mounted ? String(timeLeft.minutes).padStart(2, "0") : "--"}
                 </div>
                 <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
                   Mins
@@ -132,7 +142,7 @@ export default function Hero({ onExploreClick, settings }: HeroProps) {
               </div>
               <div className="bg-black/40 rounded-xl p-3 border border-white/5">
                 <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono">
-                  {String(timeLeft.seconds).padStart(2, "0")}
+                  {mounted ? String(timeLeft.seconds).padStart(2, "0") : "--"}
                 </div>
                 <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
                   Secs

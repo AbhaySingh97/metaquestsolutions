@@ -151,12 +151,14 @@ export default function AdminPage() {
     if (!confirm("Are you sure you want to remove this workshop? It will be removed from the live site immediately.")) {
       return;
     }
+    // Instantly remove from UI
+    setWorkshops((prev) => prev.filter((w) => w.id !== id));
     try {
       const res = await fetch(`/api/admin/workshops?id=${id}`, {
         method: "DELETE",
       });
       const data = await res.json();
-      if (data.success) {
+      if (data.success && Array.isArray(data.workshops)) {
         setWorkshops(data.workshops);
       }
     } catch (err) {
