@@ -32,17 +32,17 @@ export default function Footer() {
               </li>
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  Autonomous Density Traffic
+                  Precision Crop Health & NDVI
                 </a>
               </li>
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  Patent & Grant Novelty Dossier
+                  YOLOv8 Plant Pathology
                 </a>
               </li>
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  GreenBinX Smart IoT
+                  Edge AI & Sensor Fusion
                 </a>
               </li>
             </ul>

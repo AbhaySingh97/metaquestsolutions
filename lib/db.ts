@@ -55,7 +55,7 @@ const DEFAULT_SETTINGS: SiteSettings = {
   heroHeadline: "Pioneering Tomorrow with",
   heroHighlight: "Deep Tech",
   heroSubtitle:
-    "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Autonomous Smart Traffic Systems, GreenBinX IoT, and Patent Novelty Formulation with hands-on researchers.",
+    "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Crop Disease Computer Vision, and Yield Prediction with hands-on researchers.",
   nextCohortDate: "2026-10-24T10:00:00+05:30",
   metrics: [
     {

@@ -27,7 +27,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
   const highlight = settings?.heroHighlight || "Deep Tech";
   const subtitle =
     settings?.heroSubtitle ||
-    "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Autonomous Smart Traffic Systems, GreenBinX IoT, and Patent Novelty Formulation with hands-on researchers.";
+    "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Crop Disease Computer Vision, and Yield Prediction with hands-on researchers.";
 
   // Calculate target timestamp dynamically from actual scheduled workshop or settings
   const targetTimestamp = settings?.nextCohortDate
