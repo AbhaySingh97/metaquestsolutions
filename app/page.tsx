@@ -3,13 +3,19 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import AnimatedStatsBar from "@/components/AnimatedStatsBar";
 import LogoMarquee from "@/components/LogoMarquee";
+import BentoGrid from "@/components/BentoGrid";
+import TerminalShowcase from "@/components/TerminalShowcase";
 import WorkshopList from "@/components/WorkshopList";
+import HowItWorksTimeline from "@/components/HowItWorksTimeline";
+import ComparisonMatrix from "@/components/ComparisonMatrix";
 import AboutSection from "@/components/AboutSection";
 import TechStackMarquee from "@/components/TechStackMarquee";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import SyllabusModal from "@/components/SyllabusModal";
+import FloatingRegisterDock from "@/components/FloatingRegisterDock";
 import { Workshop, WORKSHOPS_DATA } from "@/data/workshops";
 import { SiteSettings } from "@/lib/db";
 
@@ -57,33 +63,48 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-[#070A12] text-gray-100 relative selection:bg-cyan-500 selection:text-black">
-      {/* Floating Navbar with Framer Motion Entrance */}
+      {/* Floating Navbar */}
       <Navbar onExploreClick={scrollToWorkshops} />
 
-      {/* Hero with Radiant Horizon Glow & Deep-Tech Workbench Mockup */}
+      {/* Hero with Radiant Horizon Glow & Live Countdown Timer */}
       <Hero
         onExploreClick={scrollToWorkshops}
         settings={siteSettings}
         nextWorkshop={workshops[0]}
       />
 
-      {/* Magic UI Style Infinite Tooling & Partner Marquee */}
+      {/* Component 5: Animated Counter Stats Bar */}
+      <AnimatedStatsBar />
+
+      {/* Infinite Tooling & Partner Marquee */}
       <LogoMarquee />
 
-      {/* Live Workshops Catalog with Roadmap Curriculum & Framer Motion Pill */}
+      {/* Component 1: 3D Spotlight Bento Grid */}
+      <BentoGrid />
+
+      {/* Component 2: Interactive "Run Code" Terminal Showcase */}
+      <TerminalShowcase />
+
+      {/* Live Workshops Catalog */}
       <WorkshopList
         workshops={workshops}
         onSelectSyllabus={(w) => setSyllabusWorkshop(w)}
         onSelectRegister={handleDirectRegister}
       />
 
-      {/* About MetaQuest & Foundational Mentors (Abhay, Anant, Anamika) */}
+      {/* Component 3: Scroll-Linked 4-Step Stepper Timeline */}
+      <HowItWorksTimeline onExploreClick={scrollToWorkshops} />
+
+      {/* Component 4: Interactive Comparison Matrix */}
+      <ComparisonMatrix />
+
+      {/* Component 6: About MetaQuest & Interactive Mentors */}
       <AboutSection />
 
-      {/* Magic UI Style Bottom Icon Matrix Marquee with Central Floating CTA */}
+      {/* Bottom Tooling Marquee with Central Floating CTA */}
       <TechStackMarquee onExploreClick={scrollToWorkshops} />
 
-      {/* Dynamic FAQs with Framer Motion Spring Accordion */}
+      {/* Dynamic FAQs Accordion */}
       <FAQSection faqs={siteSettings?.faqs} />
 
       {/* Global Footer */}
@@ -93,6 +114,13 @@ export default function HomePage() {
       <SyllabusModal
         workshop={syllabusWorkshop}
         onClose={() => setSyllabusWorkshop(null)}
+      />
+
+      {/* Component 7: Floating Sticky Registration Dock */}
+      <FloatingRegisterDock
+        workshop={workshops[0]}
+        settings={siteSettings}
+        onRegisterClick={handleDirectRegister}
       />
     </main>
   );

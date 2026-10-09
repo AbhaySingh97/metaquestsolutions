@@ -2,6 +2,7 @@
 
 import { Cpu, Lightbulb, FileText, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import InteractiveMentors from "@/components/InteractiveMentors";
 
 export default function AboutSection() {
   const pillars = [
@@ -22,25 +23,6 @@ export default function AboutSection() {
       title: "Real-World Field Telemetry & Data",
       description:
         "Train machine learning models on messy, real-world field telemetry—from multi-sensor hardware streams and physical ADC noise to high-resolution edge optical feeds.",
-    },
-  ];
-
-  // Strictly preserve founder order: Abhay, Anant, Anamika
-  const team = [
-    {
-      name: "Abhay",
-      role: "Applied ML & Computer Vision",
-      bio: "Specializes in deep learning vision architectures, edge model quantization, and real-time computer vision deployment.",
-    },
-    {
-      name: "Anant",
-      role: "Embedded Systems & IoT Engineer",
-      bio: "Focuses on sensor telemetry, microcontroller firmware, hardware-in-the-loop, and edge computing.",
-    },
-    {
-      name: "Anamika",
-      role: "AI & ML Research Lead",
-      bio: "Specializing in predictive machine learning architectures, statistical modeling, and research data pipelines.",
     },
   ];
 
@@ -98,37 +80,8 @@ export default function AboutSection() {
           })}
         </div>
 
-        {/* Foundational Mentors Section */}
-        <div>
-          <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
-            <div>
-              <h3 className="text-2xl font-bold text-white">Workshop Mentors</h3>
-              <p className="text-xs text-gray-400">Guiding every live hands-on session</p>
-            </div>
-            <span className="text-xs font-mono text-cyan-400">MetaQuest Core Team</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {team.map((member, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -4 }}
-                className="p-6 rounded-3xl bg-zinc-950/60 border border-white/10 hover:border-cyan-500/30 transition-all backdrop-blur-md"
-              >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-indigo-600 text-white font-extrabold flex items-center justify-center text-lg mb-4 shadow-md shadow-cyan-500/20">
-                  {member.name.charAt(0)}
-                </div>
-                <h4 className="text-lg font-bold text-white">{member.name}</h4>
-                <div className="text-xs font-mono text-cyan-400 mb-2">{member.role}</div>
-                <p className="text-xs text-gray-400 leading-relaxed">{member.bio}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        {/* Foundational Mentors Section with Interactive Dynamic Focus */}
+        <InteractiveMentors />
       </div>
     </section>
   );
