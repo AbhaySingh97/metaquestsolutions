@@ -91,7 +91,7 @@ export default function WorkshopCard({
           <div className="flex items-center justify-between text-xs mb-1.5">
             <span className="text-gray-400 flex items-center gap-1.5 font-medium">
               <Users className="w-3.5 h-3.5 text-gray-400" />
-              Cohort Capacity
+              Seats Available
             </span>
             <span className="font-mono text-cyan-400 font-medium">
               {seatsRemaining} seats left / {workshop.totalSeats} total

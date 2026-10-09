@@ -55,13 +55,13 @@ export default function WorkshopList({
         >
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-cyan-300 text-xs font-mono tracking-wider uppercase mb-3">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Masterclasses</span>
+            <span>Live Workshops</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Curated Hands-On Cohorts.
+            Upcoming Live Workshops
           </h2>
           <p className="text-base sm:text-lg text-gray-400">
-            Select a cohort below to explore interactive roadmap curriculums and register your seat directly via Google Form.
+            Explore the syllabus below and reserve your seat directly through the official Google Form.
           </p>
         </motion.div>
 

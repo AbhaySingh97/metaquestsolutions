@@ -117,10 +117,10 @@ export default function TechStackMarquee({ onExploreClick }: { onExploreClick: (
           </div>
 
           <h3 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
-            Stop wasting time on toy tutorials.
+            Build Real Systems, Not Toy Demos.
           </h3>
           <p className="text-sm sm:text-base text-gray-300 max-w-lg mx-auto mb-8 leading-relaxed">
-            Master real computer vision inference, ESP32 microcontroller telemetry, and patent claim formulation with direct mentor support.
+            Learn real computer vision, ESP32 microcontroller programming, and patent drafting with live mentor support.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -128,7 +128,7 @@ export default function TechStackMarquee({ onExploreClick }: { onExploreClick: (
               onClick={onExploreClick}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full font-bold text-sm text-black bg-white hover:bg-gray-100 transition-all shadow-xl hover:scale-105 active:scale-95"
             >
-              <span>Explore Active Cohort</span>
+              <span>Explore Upcoming Workshop</span>
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
@@ -140,7 +140,7 @@ export default function TechStackMarquee({ onExploreClick }: { onExploreClick: (
           </div>
 
           <div className="mt-6 text-[11px] font-mono text-gray-400">
-            Official Live Cohorts Hosted on Google Meet • No Hidden Pre-requisites
+            Live Sessions Hosted on Google Meet • Beginner Friendly
           </div>
         </motion.div>
       </div>

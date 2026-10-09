@@ -228,7 +228,7 @@ export default function RegistrationModal({
             {/* Workshop Summary Card */}
             <div className="p-4 rounded-xl bg-black/40 border border-white/5">
               <span className="text-[10px] font-mono uppercase tracking-wider text-cyan-400">
-                Selected Cohort
+                Selected Workshop
               </span>
               <h4 className="text-sm font-bold text-white line-clamp-1 mt-0.5">
                 {workshop.title}

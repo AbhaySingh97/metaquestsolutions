@@ -63,10 +63,10 @@ export default function AboutSection() {
             <span>About MetaQuest Solutions</span>
           </div>
           <h2 className="text-3xl sm:text-5xl font-extrabold text-white tracking-tight mb-4">
-            Democratizing Frontier Research & Applied Deep-Tech.
+            Practical Engineering Beyond College Textbooks.
           </h2>
           <p className="text-base sm:text-lg text-gray-400 leading-relaxed">
-            MetaQuest Solutions was founded by researchers and system builders to bridge the gap between academic college syllabus and high-impact patentable innovation. We build and mentor real systems.
+            MetaQuest Solutions helps students and engineers build real-world systems with hands-on hardware, real datasets, and direct guidance from active researchers.
           </p>
         </motion.div>
 
@@ -102,8 +102,8 @@ export default function AboutSection() {
         <div>
           <div className="flex items-center justify-between mb-8 pb-4 border-b border-white/10">
             <div>
-              <h3 className="text-2xl font-bold text-white">Founding Research Mentors</h3>
-              <p className="text-xs text-gray-400">Guiding every live hands-on cohort</p>
+              <h3 className="text-2xl font-bold text-white">Workshop Mentors</h3>
+              <p className="text-xs text-gray-400">Guiding every live hands-on session</p>
             </div>
             <span className="text-xs font-mono text-cyan-400">MetaQuest Core Team</span>
           </div>

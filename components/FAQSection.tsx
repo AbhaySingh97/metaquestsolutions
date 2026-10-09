@@ -36,7 +36,7 @@ export default function FAQSection({ faqs }: FAQSectionProps) {
             Frequently Asked Questions
           </h2>
           <p className="text-base text-gray-400">
-            Everything you need to know about Google Form registrations, cohorts, and Google Meet live sessions.
+            Everything you need to know about registration, Google Meet access, and workshop materials.
           </p>
         </motion.div>
 

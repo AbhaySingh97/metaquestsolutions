@@ -6,7 +6,7 @@ import { Cpu, Terminal, Zap, BookOpen, Layers, ShieldCheck, Video, Flame } from 
 const PARTNERS = [
   { name: "PyTorch Edge", icon: Flame, tag: "AI Framework" },
   { name: "Espressif ESP32", icon: Cpu, tag: "Firmware" },
-  { name: "Google Meet", icon: Video, tag: "Live Cohorts" },
+  { name: "Google Meet", icon: Video, tag: "Live Sessions" },
   { name: "IEEE Xplore", icon: BookOpen, tag: "Research Pubs" },
   { name: "OpenCV Vision", icon: Layers, tag: "Computer Vision" },
   { name: "InPASS Registry", icon: ShieldCheck, tag: "Patent Office" },

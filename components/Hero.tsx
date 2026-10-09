@@ -37,12 +37,12 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
 
   const announcement =
     settings?.announcement ||
-    "Next Live Cohort Enrolling Now • Saturday, Oct 24, 2026";
-  const headline = settings?.heroHeadline || "Pioneering Tomorrow with";
-  const highlight = settings?.heroHighlight || "Deep Tech";
+    "Registrations Open for Next Workshop • Saturday, Oct 24, 2026";
+  const headline = settings?.heroHeadline || "Learn Practical Engineering &";
+  const highlight = settings?.heroHighlight || "Applied Tech";
   const subtitle =
     settings?.heroSubtitle ||
-    "Bridge academic theory and real-world deployment. Master Applied AI, Embedded IoT Telemetry, Edge Computer Vision, and Patent Novelty Formulation with hands-on researchers.";
+    "Learn Applied AI, Embedded IoT, Computer Vision, and Patent Filing through live interactive sessions with real code and hardware.";
 
   // Calculate target timestamp dynamically from actual scheduled workshop or settings
   const targetTimestamp = settings?.nextCohortDate
@@ -115,7 +115,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">
               {highlight}
             </span>{" "}
-            & Research Masterclasses.
+            & Hands-on Workshops.
           </motion.h1>
 
           {/* Subheading */}
@@ -174,7 +174,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
               <div className="flex items-center gap-2 bg-black/60 px-3 py-1 rounded-lg border border-white/10">
                 <Clock className="w-3.5 h-3.5 text-cyan-400" />
                 <span className="text-[10px] font-mono text-gray-400 uppercase hidden sm:inline">
-                  Live Cohort:
+                  Next Workshop Starts In:
                 </span>
                 <span className="text-xs font-mono font-bold text-white tracking-wider">
                   {mounted
@@ -190,7 +190,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
                 {[
                   { id: "vision", label: "Edge AI & Vision", icon: Scan },
                   { id: "telemetry", label: "Embedded IoT Telemetry", icon: Cpu },
-                  { id: "patent", label: "Patent Formulation Dossier", icon: FileCheck2 },
+                  { id: "patent", label: "Patent Drafting & Research", icon: FileCheck2 },
                 ].map((tab) => {
                   const Icon = tab.icon;
                   const isActive = activePreviewTab === tab.id;

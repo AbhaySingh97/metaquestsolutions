@@ -51,18 +51,18 @@ export interface DatabaseSchema {
 }
 
 const DEFAULT_SETTINGS: SiteSettings = {
-  announcement: "Next Live Cohort Enrolling Now | Live Mentorship + Certificate",
-  heroHeadline: "Pioneering Tomorrow with",
-  heroHighlight: "Deep Tech",
+  announcement: "Registrations Open for Next Workshop | Live Mentorship + Certificate",
+  heroHeadline: "Learn Practical Engineering &",
+  heroHighlight: "Applied Tech",
   heroSubtitle:
-    "Bridge academic theory and real-world deployment. Master Applied AI, Embedded IoT Telemetry, Edge Computer Vision, and Patent Novelty Formulation with hands-on researchers.",
+    "Learn Applied AI, Embedded IoT, Computer Vision, and Patent Filing through live interactive sessions with real code and hardware.",
   nextCohortDate: "2026-10-24T10:00:00+05:30",
   metrics: [
     {
       id: "m-1",
-      label: "Live Cohorts",
-      value: "1 Active Batch",
-      detail: "Applied AI, Embedded IoT & Patents",
+      label: "Active Batches",
+      value: "1 Live Batch",
+      detail: "Hands-on AI & Embedded IoT",
     },
     {
       id: "m-2",

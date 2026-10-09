@@ -39,7 +39,7 @@ export default function Navbar({ onExploreClick }: { onExploreClick: () => void 
               className="text-xs font-semibold uppercase tracking-wider text-gray-300 hover:text-white transition-colors flex items-center gap-1.5"
             >
               <Calendar className="w-3.5 h-3.5 text-cyan-400" />
-              <span>Cohorts</span>
+              <span>Workshops</span>
             </a>
             <a
               href="#about"
