@@ -3,8 +3,11 @@
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import LogoMarquee from "@/components/LogoMarquee";
 import WorkshopList from "@/components/WorkshopList";
+import InteractiveShowcase from "@/components/InteractiveShowcase";
 import AboutSection from "@/components/AboutSection";
+import TechStackMarquee from "@/components/TechStackMarquee";
 import FAQSection from "@/components/FAQSection";
 import Footer from "@/components/Footer";
 import SyllabusModal from "@/components/SyllabusModal";
@@ -54,28 +57,37 @@ export default function HomePage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0B0F19] text-gray-100 relative selection:bg-cyan-500 selection:text-black">
-      {/* Floating Navbar with Official Logo */}
+    <main className="min-h-screen bg-[#070A12] text-gray-100 relative selection:bg-cyan-500 selection:text-black">
+      {/* Floating Navbar with Framer Motion Entrance */}
       <Navbar onExploreClick={scrollToWorkshops} />
 
-      {/* Hero with Live Dynamic Settings & Real Scheduled Countdown */}
+      {/* Hero with Radiant Horizon Glow & Deep-Tech Workbench Mockup */}
       <Hero
         onExploreClick={scrollToWorkshops}
         settings={siteSettings}
         nextWorkshop={workshops[0]}
       />
 
-      {/* Live Workshops Catalog with Roadmap Curriculum synced with Admin CMS */}
+      {/* Magic UI Style Infinite Tooling & Partner Marquee */}
+      <LogoMarquee />
+
+      {/* Live Workshops Catalog with Roadmap Curriculum & Framer Motion Pill */}
       <WorkshopList
         workshops={workshops}
         onSelectSyllabus={(w) => setSyllabusWorkshop(w)}
         onSelectRegister={handleDirectRegister}
       />
 
+      {/* Interactive Cohort Deep-Tech Preview (YOLOv8 Vision, ESP32 Telemetry, Patent Dossier) */}
+      <InteractiveShowcase />
+
       {/* About MetaQuest & Foundational Mentors (Abhay, Anant, Anamika) */}
       <AboutSection />
 
-      {/* Dynamic FAQs synced with Admin CMS */}
+      {/* Magic UI Style Bottom Icon Matrix Marquee with Central Floating CTA */}
+      <TechStackMarquee onExploreClick={scrollToWorkshops} />
+
+      {/* Dynamic FAQs with Framer Motion Spring Accordion */}
       <FAQSection faqs={siteSettings?.faqs} />
 
       {/* Global Footer */}

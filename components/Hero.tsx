@@ -1,7 +1,21 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { ArrowRight, Clock, CheckCircle2, ShieldCheck, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  Clock,
+  CheckCircle2,
+  ShieldCheck,
+  Zap,
+  Sparkles,
+  Terminal,
+  Activity,
+  Scan,
+  Cpu,
+  FileCheck2,
+  ChevronRight,
+} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { SiteSettings } from "@/lib/db";
 import { Workshop } from "@/data/workshops";
 
@@ -13,6 +27,7 @@ interface HeroProps {
 
 export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroProps) {
   const [mounted, setMounted] = useState(false);
+  const [activePreviewTab, setActivePreviewTab] = useState<"vision" | "telemetry" | "patent">("vision");
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -22,7 +37,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
 
   const announcement =
     settings?.announcement ||
-    "Next Live Cohort Enrolling Now | Live Mentorship + Certificate";
+    "Next Live Cohort Enrolling Now • Saturday, Oct 24, 2026";
   const headline = settings?.heroHeadline || "Pioneering Tomorrow with";
   const highlight = settings?.heroHighlight || "Deep Tech";
   const subtitle =
@@ -59,97 +74,253 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
     : "Saturday, Oct 24, 2026 • 10:00 AM IST";
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-cyber-grid">
-      {/* Background Ambient Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 w-[450px] h-[300px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
+    <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-[#070A12]">
+      {/* Magic UI Style Top Ambient Radiant Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-b from-cyan-500/15 via-indigo-600/10 to-transparent rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 right-1/4 w-[400px] h-[300px] bg-teal-500/10 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Cyber Grid Texture Overlay */}
+      <div className="absolute inset-0 bg-cyber-grid opacity-30 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Live Cohort Status - Clean Modern Tag */}
-          <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-lg bg-white/5 border border-white/10 text-gray-200 text-xs font-mono mb-6 tracking-wide">
-            <span className="w-2 h-2 rounded-full bg-cyan-400" />
-            <span className="font-semibold uppercase tracking-wider">{announcement}</span>
-          </div>
+          {/* Shimmer Pill Badge (Magic UI Style) */}
+          <motion.div
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block mb-6"
+          >
+            <button
+              onClick={onExploreClick}
+              className="group inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 hover:border-cyan-500/40 text-gray-300 hover:text-white text-xs font-mono transition-all backdrop-blur-md shadow-lg shadow-black/40 hover:scale-105 active:scale-95"
+            >
+              <span className="flex h-2 w-2 relative">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500" />
+              </span>
+              <span>{announcement}</span>
+              <ChevronRight className="w-3.5 h-3.5 text-gray-400 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all" />
+            </button>
+          </motion.div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.1] mb-6">
+          {/* Main Headline with Framer Motion Reveal */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white leading-[1.08] mb-6"
+          >
             {headline}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">
               {highlight}
             </span>{" "}
-            & Research Workshops.
-          </h1>
+            & Research Masterclasses.
+          </motion.h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed font-normal">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-base sm:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed font-normal"
+          >
             {subtitle}
-          </p>
+          </motion.p>
 
-          {/* Call to Actions */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14">
+          {/* Call to Actions (Magic UI style crisp pill buttons) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-3.5 mb-14"
+          >
             <button
               onClick={onExploreClick}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl font-bold text-base text-white bg-gradient-to-r from-cyan-500 via-indigo-600 to-indigo-700 hover:from-cyan-400 hover:to-indigo-500 shadow-lg shadow-cyan-500/20 transition-all hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-bold text-sm text-black bg-white hover:bg-gray-100 transition-all shadow-xl shadow-cyan-500/10 hover:scale-105 active:scale-95 group"
             >
               <span>Explore Upcoming Workshops</span>
-              <ArrowRight className="w-5 h-5" />
+              <ArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
             </button>
             <a
               href="#about"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl font-semibold text-base text-gray-200 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-sm text-gray-200 bg-white/[0.05] border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all backdrop-blur-md"
             >
               <span>Why MetaQuest Solutions?</span>
             </a>
-          </div>
+          </motion.div>
 
-          {/* Live Countdown Card - Dynamically Bound to Next Workshop */}
-          <div className="max-w-xl mx-auto rounded-2xl p-6 bg-surface/70 border border-white/10 relative overflow-hidden">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-4 pb-3 border-b border-white/10">
-              <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-gray-300">
-                <Clock className="w-4 h-4 text-cyan-400" />
-                <span>Next Live Cohort: {workshopScheduleText}</span>
+          {/* HERO WORKBENCH / APP FRAME PREVIEW (Replicating Magic UI App Showcase) */}
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="max-w-4xl mx-auto rounded-2xl bg-zinc-950/90 border border-white/10 shadow-2xl shadow-black/80 overflow-hidden relative backdrop-blur-xl text-left"
+          >
+            {/* Window Bezel Title Bar */}
+            <div className="flex items-center justify-between px-4 py-3 bg-white/[0.03] border-b border-white/10">
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-3 h-3 rounded-full bg-rose-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                </div>
+                <span className="text-[11px] font-mono text-gray-400 ml-2 hidden sm:inline-block">
+                  metaquest-studio // v2.4 (YOLOv8 Edge & ESP32 FreeRTOS)
+                </span>
               </div>
-              <span className="text-xs px-2.5 py-1 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono">
-                Live Google Meet
-              </span>
+
+              {/* Integrated Live Dynamic Countdown Timer in Window Header */}
+              <div className="flex items-center gap-2 bg-black/60 px-3 py-1 rounded-lg border border-white/10">
+                <Clock className="w-3.5 h-3.5 text-cyan-400" />
+                <span className="text-[10px] font-mono text-gray-400 uppercase hidden sm:inline">
+                  Live Cohort:
+                </span>
+                <span className="text-xs font-mono font-bold text-white tracking-wider">
+                  {mounted
+                    ? `${String(timeLeft.days).padStart(2, "0")}d : ${String(timeLeft.hours).padStart(2, "0")}h : ${String(timeLeft.minutes).padStart(2, "0")}m : ${String(timeLeft.seconds).padStart(2, "0")}s`
+                    : "-- : -- : -- : --"}
+                </span>
+              </div>
             </div>
 
-            <div className="grid grid-cols-4 gap-3 text-center">
-              <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {mounted ? String(timeLeft.days).padStart(2, "0") : "--"}
-                </div>
-                <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
-                  Days
-                </div>
+            {/* Workbench Navigation Tabs */}
+            <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-black/40 text-xs">
+              <div className="flex items-center gap-1 overflow-x-auto">
+                {[
+                  { id: "vision", label: "Crop Vision (YOLOv8)", icon: Scan },
+                  { id: "telemetry", label: "ESP32 Telemetry Stream", icon: Cpu },
+                  { id: "patent", label: "Patent Specification Dossier", icon: FileCheck2 },
+                ].map((tab) => {
+                  const Icon = tab.icon;
+                  const isActive = activePreviewTab === tab.id;
+                  return (
+                    <button
+                      key={tab.id}
+                      onClick={() => setActivePreviewTab(tab.id as any)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all flex items-center gap-1.5 ${
+                        isActive
+                          ? "bg-white/10 text-cyan-300 font-semibold"
+                          : "text-gray-400 hover:text-gray-200"
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5" />
+                      <span>{tab.label}</span>
+                    </button>
+                  );
+                })}
               </div>
-              <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {mounted ? String(timeLeft.hours).padStart(2, "0") : "--"}
-                </div>
-                <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
-                  Hours
-                </div>
-              </div>
-              <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono">
-                  {mounted ? String(timeLeft.minutes).padStart(2, "0") : "--"}
-                </div>
-                <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
-                  Mins
-                </div>
-              </div>
-              <div className="bg-black/40 rounded-xl p-3 border border-white/5">
-                <div className="text-2xl sm:text-3xl font-extrabold text-cyan-400 font-mono">
-                  {mounted ? String(timeLeft.seconds).padStart(2, "0") : "--"}
-                </div>
-                <div className="text-[11px] uppercase tracking-wider text-gray-400 mt-1 font-medium">
-                  Secs
-                </div>
+
+              <div className="hidden sm:flex items-center gap-1.5 text-[11px] font-mono text-emerald-400">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>30 FPS Edge Inference</span>
               </div>
             </div>
-          </div>
+
+            {/* Workbench Main Content Display with Framer Motion AnimatePresence */}
+            <div className="p-5 sm:p-6 bg-gradient-to-b from-[#0B0F19] to-black min-h-[260px]">
+              <AnimatePresence mode="wait">
+                {activePreviewTab === "vision" && (
+                  <motion.div
+                    key="vision"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid grid-cols-1 md:grid-cols-12 gap-5 items-center"
+                  >
+                    {/* Simulated Camera Feed */}
+                    <div className="md:col-span-7 rounded-xl bg-black/70 border border-white/10 p-4 relative min-h-[190px] flex flex-col justify-between overflow-hidden">
+                      <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 border-b border-white/5 pb-2">
+                        <span className="text-cyan-400 font-bold">FEED: CANOPY_CAMERA_01</span>
+                        <span>RES: 1280x720 • PyTorch</span>
+                      </div>
+
+                      {/* Interactive Bounding Box on Leaf */}
+                      <div className="my-3 relative p-4 rounded-lg bg-emerald-950/20 border border-emerald-500/20 flex items-center justify-between">
+                        <div>
+                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold mb-1">
+                            <span>[0] Early Foliar Blight: 98.7% Conf</span>
+                          </div>
+                          <div className="text-[11px] text-gray-300">
+                            Spatial Mask: Area 24.8cm² • Micro-dose Spray Prescribed
+                          </div>
+                        </div>
+                        <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-300">
+                          <Activity className="w-5 h-5 animate-pulse" />
+                        </div>
+                      </div>
+
+                      <div className="text-[10px] font-mono text-gray-500 flex items-center justify-between">
+                        <span>Latency: 14.2ms (Edge NPU Quantized)</span>
+                        <span className="text-emerald-400">STATUS: INFERENCE NOMINAL</span>
+                      </div>
+                    </div>
+
+                    {/* Diagnostics Metrics */}
+                    <div className="md:col-span-5 space-y-2 text-xs font-mono">
+                      <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                        <div className="text-[10px] text-gray-400 uppercase">Model Architecture</div>
+                        <div className="text-white font-bold text-sm">YOLOv8 Nano Custom Head</div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                        <div className="text-[10px] text-gray-400 uppercase">Training Dataset</div>
+                        <div className="text-cyan-300 font-bold text-sm">18,400 Multi-Spectral Samples</div>
+                      </div>
+                      <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
+                        <div className="text-[10px] text-gray-400 uppercase">Target Deployment</div>
+                        <div className="text-emerald-400 font-bold text-sm">ESP32-S3 + Raspberry Pi 5</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {activePreviewTab === "telemetry" && (
+                  <motion.div
+                    key="telemetry"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left font-mono"
+                  >
+                    {[
+                      { label: "Soil Moisture", value: "38.4 %", status: "Optimal", color: "text-cyan-400" },
+                      { label: "Soil pH Level", value: "6.52 pH", status: "Neutral", color: "text-emerald-400" },
+                      { label: "Nitrogen (N)", value: "142 mg/kg", status: "Balanced", color: "text-amber-400" },
+                      { label: "MQTT Broker", value: "Port 8883", status: "TLS Online", color: "text-indigo-400" },
+                    ].map((item, idx) => (
+                      <div key={idx} className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
+                        <span className="text-[10px] text-gray-400 block uppercase">{item.label}</span>
+                        <div className={`text-xl font-bold my-1 ${item.color}`}>{item.value}</div>
+                        <span className="text-[10px] text-gray-400">{item.status}</span>
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+
+                {activePreviewTab === "patent" && (
+                  <motion.div
+                    key="patent"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3 }}
+                    className="space-y-2 text-xs font-mono"
+                  >
+                    <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
+                      <span className="text-cyan-400 font-bold block mb-1">
+                        [CLAIM 1] Independent Novelty Formulation:
+                      </span>
+                      <p className="text-gray-300 text-[11px] leading-relaxed">
+                        A cyber-physical agronomic system comprising a dual-sensor multi-spectral node configured to perform edge quantized CNN inference for localized bio-pesticide actuation without cloud roundtrip latency...
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
 
           {/* Trust Badges */}
           <div className="mt-12 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm text-gray-400">
@@ -163,7 +334,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
             </div>
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-indigo-400" />
-              <span>Google Meet Live Access</span>
+              <span>Official Google Meet Access</span>
             </div>
           </div>
         </div>
