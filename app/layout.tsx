@@ -10,13 +10,13 @@ export const viewport = {
 export const metadata: Metadata = {
   title: "MetaQuest Solutions | Advanced Research & Real-Time Tech Workshops",
   description:
-    "Live, hands-on masterclasses in Artificial Intelligence, Edge IoT, Precision Agritech, and Patent Novelty Formulation.",
+    "Live, hands-on masterclasses in Artificial Intelligence, Edge IoT, Embedded Systems, Computer Vision, and Patent Novelty Formulation.",
   keywords: [
     "AI workshops",
-    "IoT workshops",
-    "Precision Agriculture AI",
+    "Edge IoT workshops",
+    "Computer Vision Masterclass",
     "Patent Novelty Drafting",
-    "Smart City Engineering",
+    "Embedded Systems Engineering",
     "MetaQuest Solutions",
   ],
   authors: [{ name: "MetaQuest Solutions" }],

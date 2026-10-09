@@ -55,14 +55,14 @@ const DEFAULT_SETTINGS: SiteSettings = {
   heroHeadline: "Pioneering Tomorrow with",
   heroHighlight: "Deep Tech",
   heroSubtitle:
-    "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Crop Disease Computer Vision, and Yield Prediction with hands-on researchers.",
+    "Bridge academic theory and real-world deployment. Master Applied AI, Embedded IoT Telemetry, Edge Computer Vision, and Patent Novelty Formulation with hands-on researchers.",
   nextCohortDate: "2026-10-24T10:00:00+05:30",
   metrics: [
     {
       id: "m-1",
       label: "Live Cohorts",
       value: "1 Active Batch",
-      detail: "AI in Agriculture & Precision Farming",
+      detail: "Applied AI, Embedded IoT & Patents",
     },
     {
       id: "m-2",

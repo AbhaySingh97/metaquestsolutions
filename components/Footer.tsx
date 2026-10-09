@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="md:col-span-2 space-y-4">
             <Logo size="large" />
             <p className="text-sm text-gray-400 max-w-md leading-relaxed">
-              Advancing engineering, agriculture, and urban intelligence through live research-backed masterclasses and patent formulation.
+              Advancing frontier engineering, applied artificial intelligence, and edge computing through live research-backed masterclasses and patent formulation.
             </p>
             <div className="flex items-center gap-2 text-xs text-gray-400 font-mono">
               <ShieldCheck className="w-4 h-4 text-cyan-400" />
@@ -27,22 +27,22 @@ export default function Footer() {
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  AI & ML in Agriculture
+                  Applied AI & Computer Vision
                 </a>
               </li>
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  Precision Crop Health & NDVI
+                  Embedded IoT & Microcontrollers
                 </a>
               </li>
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  YOLOv8 Plant Pathology
+                  Autonomous & Edge Computing
                 </a>
               </li>
               <li>
                 <a href="#workshops" className="hover:text-cyan-400 transition-colors">
-                  Edge AI & Sensor Fusion
+                  Patent Filing & Novelty Dossiers
                 </a>
               </li>
             </ul>

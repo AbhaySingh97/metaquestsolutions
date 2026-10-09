@@ -19,9 +19,9 @@ export default function AboutSection() {
     },
     {
       icon: Lightbulb,
-      title: "Real Agricultural Datasets",
+      title: "Real-World Field Telemetry & Data",
       description:
-        "Train machine learning models on messy, real-world field telemetry—from soil chemistry (N, P, K, pH) to plant disease pathology and multi-spectral indices.",
+        "Train machine learning models on messy, real-world field telemetry—from multi-sensor hardware streams and physical ADC noise to high-resolution edge optical feeds.",
     },
   ];
 
@@ -30,7 +30,7 @@ export default function AboutSection() {
     {
       name: "Abhay",
       role: "Applied ML & Computer Vision",
-      bio: "Specializes in deep learning vision models, agricultural disease classification, and edge deployment.",
+      bio: "Specializes in deep learning vision architectures, edge model quantization, and real-time computer vision deployment.",
     },
     {
       name: "Anant",
@@ -40,7 +40,7 @@ export default function AboutSection() {
     {
       name: "Anamika",
       role: "AI & ML Research Lead",
-      bio: "Specializing in agronomic machine learning, predictive modeling, and data science architecture.",
+      bio: "Specializing in predictive machine learning architectures, statistical modeling, and research data pipelines.",
     },
   ];
 

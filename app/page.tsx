@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import LogoMarquee from "@/components/LogoMarquee";
 import WorkshopList from "@/components/WorkshopList";
-import InteractiveShowcase from "@/components/InteractiveShowcase";
 import AboutSection from "@/components/AboutSection";
 import TechStackMarquee from "@/components/TechStackMarquee";
 import FAQSection from "@/components/FAQSection";
@@ -77,9 +76,6 @@ export default function HomePage() {
         onSelectSyllabus={(w) => setSyllabusWorkshop(w)}
         onSelectRegister={handleDirectRegister}
       />
-
-      {/* Interactive Cohort Deep-Tech Preview (YOLOv8 Vision, ESP32 Telemetry, Patent Dossier) */}
-      <InteractiveShowcase />
 
       {/* About MetaQuest & Foundational Mentors (Abhay, Anant, Anamika) */}
       <AboutSection />

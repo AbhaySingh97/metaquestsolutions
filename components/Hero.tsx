@@ -42,7 +42,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
   const highlight = settings?.heroHighlight || "Deep Tech";
   const subtitle =
     settings?.heroSubtitle ||
-    "Bridge academic theory and real-world deployment. Master Precision AI in Agriculture, Crop Disease Computer Vision, and Yield Prediction with hands-on researchers.";
+    "Bridge academic theory and real-world deployment. Master Applied AI, Embedded IoT Telemetry, Edge Computer Vision, and Patent Novelty Formulation with hands-on researchers.";
 
   // Calculate target timestamp dynamically from actual scheduled workshop or settings
   const targetTimestamp = settings?.nextCohortDate
@@ -188,9 +188,9 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
             <div className="flex items-center justify-between px-4 py-2 border-b border-white/5 bg-black/40 text-xs">
               <div className="flex items-center gap-1 overflow-x-auto">
                 {[
-                  { id: "vision", label: "Crop Vision (YOLOv8)", icon: Scan },
-                  { id: "telemetry", label: "ESP32 Telemetry Stream", icon: Cpu },
-                  { id: "patent", label: "Patent Specification Dossier", icon: FileCheck2 },
+                  { id: "vision", label: "Edge AI & Vision", icon: Scan },
+                  { id: "telemetry", label: "Embedded IoT Telemetry", icon: Cpu },
+                  { id: "patent", label: "Patent Formulation Dossier", icon: FileCheck2 },
                 ].map((tab) => {
                   const Icon = tab.icon;
                   const isActive = activePreviewTab === tab.id;
@@ -232,18 +232,18 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
                     {/* Simulated Camera Feed */}
                     <div className="md:col-span-7 rounded-xl bg-black/70 border border-white/10 p-4 relative min-h-[190px] flex flex-col justify-between overflow-hidden">
                       <div className="flex items-center justify-between text-[11px] font-mono text-gray-400 border-b border-white/5 pb-2">
-                        <span className="text-cyan-400 font-bold">FEED: CANOPY_CAMERA_01</span>
+                        <span className="text-cyan-400 font-bold">FEED: OPTICAL_EDGE_STREAM_01</span>
                         <span>RES: 1280x720 • PyTorch</span>
                       </div>
 
-                      {/* Interactive Bounding Box on Leaf */}
-                      <div className="my-3 relative p-4 rounded-lg bg-emerald-950/20 border border-emerald-500/20 flex items-center justify-between">
+                      {/* Interactive Bounding Box */}
+                      <div className="my-3 relative p-4 rounded-lg bg-cyan-950/20 border border-cyan-500/20 flex items-center justify-between">
                         <div>
-                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/30 text-amber-300 text-[10px] font-mono font-bold mb-1">
-                            <span>[0] Early Foliar Blight: 98.7% Conf</span>
+                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 text-[10px] font-mono font-bold mb-1">
+                            <span>[0] Autonomous Target Tracking: 98.7% Conf</span>
                           </div>
                           <div className="text-[11px] text-gray-300">
-                            Spatial Mask: Area 24.8cm² • Micro-dose Spray Prescribed
+                            Spatial Tracking: Bounding Box Coordinates [x: 342, y: 198, w: 240, h: 180]
                           </div>
                         </div>
                         <div className="w-10 h-10 rounded-lg bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-300">
@@ -264,12 +264,12 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
                         <div className="text-white font-bold text-sm">YOLOv8 Nano Custom Head</div>
                       </div>
                       <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
-                        <div className="text-[10px] text-gray-400 uppercase">Training Dataset</div>
-                        <div className="text-cyan-300 font-bold text-sm">18,400 Multi-Spectral Samples</div>
+                        <div className="text-[10px] text-gray-400 uppercase">Quantization & Export</div>
+                        <div className="text-cyan-300 font-bold text-sm">INT8 TensorRT & ONNX Runtime</div>
                       </div>
                       <div className="p-3 rounded-lg bg-white/[0.02] border border-white/5">
                         <div className="text-[10px] text-gray-400 uppercase">Target Deployment</div>
-                        <div className="text-emerald-400 font-bold text-sm">ESP32-S3 + Raspberry Pi 5</div>
+                        <div className="text-emerald-400 font-bold text-sm">ESP32-S3 / Jetson / Edge NPU</div>
                       </div>
                     </div>
                   </motion.div>
@@ -285,10 +285,10 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
                     className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-left font-mono"
                   >
                     {[
-                      { label: "Soil Moisture", value: "38.4 %", status: "Optimal", color: "text-cyan-400" },
-                      { label: "Soil pH Level", value: "6.52 pH", status: "Neutral", color: "text-emerald-400" },
-                      { label: "Nitrogen (N)", value: "142 mg/kg", status: "Balanced", color: "text-amber-400" },
-                      { label: "MQTT Broker", value: "Port 8883", status: "TLS Online", color: "text-indigo-400" },
+                      { label: "Sensor ADC Stream", value: "3.28 V", status: "12-bit ADC Nominal", color: "text-cyan-400" },
+                      { label: "Bus Protocol", value: "I2C / SPI", status: "400 kHz Fast-Mode", color: "text-emerald-400" },
+                      { label: "FreeRTOS Kernel", value: "Priority 2", status: "Non-Blocking ISR", color: "text-amber-400" },
+                      { label: "MQTT TLS Broker", value: "Port 8883", status: "TLS 1.3 Online", color: "text-indigo-400" },
                     ].map((item, idx) => (
                       <div key={idx} className="p-3.5 rounded-xl bg-white/[0.03] border border-white/5">
                         <span className="text-[10px] text-gray-400 block uppercase">{item.label}</span>
@@ -313,7 +313,7 @@ export default function Hero({ onExploreClick, settings, nextWorkshop }: HeroPro
                         [CLAIM 1] Independent Novelty Formulation:
                       </span>
                       <p className="text-gray-300 text-[11px] leading-relaxed">
-                        A cyber-physical agronomic system comprising a dual-sensor multi-spectral node configured to perform edge quantized CNN inference for localized bio-pesticide actuation without cloud roundtrip latency...
+                        A cyber-physical edge computing architecture configured to execute real-time low-latency multi-modal sensor fusion with deterministic hardware interrupt handling and provable differential novel claims over prior art.
                       </p>
                     </div>
                   </motion.div>
